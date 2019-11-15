@@ -7,7 +7,8 @@ const initialState = {
     name: "",
     location: "",
     type: "",
-    water_schedule: "",
+    // can we put an object in here?
+    water_schedule: {},
     user_id: undefined
   },
   isFetchingPlants: false,
