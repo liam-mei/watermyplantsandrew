@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -127,4 +128,15 @@ export default function Login(props) {
       </Box>
     </Container>
   );
+}
+=======
+
+import React, { Component } from 'react'
+
+class Login extends Component {
+  render() {
+    return (
+      <h1> This is the login page </h1>
+    );
+  }
 }
