@@ -60,7 +60,7 @@ const StyledButton = withStyles({
   }
 })(Button);
 
-export default function Register(props) {
+export default function Login(props) {
   const classes = useStyles();
 
   const [note, setNote] = useState({});
@@ -109,20 +109,30 @@ export default function Register(props) {
             autoComplete="current-password"
             onChange={handlerChange}
           />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="phone"
+            label="Phone Number"
+            name="phone"
+            autoComplete="phone"
+            autoFocus
+            onChange={handlerChange}
+          />
           <StyledButton
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="white"
             className={classes.submit}
           >
-            Sign In
+            Register
           </StyledButton>
           <Grid container>
             <Grid item xs>
-              <Link href="" variant="body2">
-                {"Already have an account? Sign in"}
-              </Link>
+              <Link>{"Already have an account? Sign in"}</Link>
             </Grid>
           </Grid>
         </form>
