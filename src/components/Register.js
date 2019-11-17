@@ -60,9 +60,9 @@ const Register = props => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    phone: "",
     username: "",
     password: "",
+    phone: "",
     user_id: Date.now()
   });
 
@@ -80,8 +80,7 @@ const Register = props => {
 
     event.preventDefault();
      setUser();
-    props.registerUser(props.user)
-    console.log('submit new user',event)
+    props.registerUser(user)
   };
 
   return (
@@ -144,7 +143,7 @@ const Register = props => {
           <Grid container>
             <Grid item xs>
               <Link href="" variant="body2">
-                {"Don't have an account? Register now"}
+                {"Already have an account? Log In."}
               </Link>
             </Grid>
           </Grid>

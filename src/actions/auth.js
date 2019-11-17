@@ -40,7 +40,6 @@ export const registerUser = ({ username, password, phone }) => dispatch => {
   })
     .then(response => {
       localStorage.setItem("token", response.data.token);
-
       dispatch({ type: LOGIN_SUCCESS });
       dispatch(push("/dashboard"));
     })

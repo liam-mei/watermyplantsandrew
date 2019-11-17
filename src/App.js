@@ -17,8 +17,8 @@ const App = () => (
 
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/plant/add" component={AddPlant} />
         <PrivateRoute exact path="/plant/:id" component={PlantCard} />
