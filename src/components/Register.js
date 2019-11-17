@@ -10,7 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import MuiPhoneNumber from 'material-ui-phone-number'
 
+import { connect } from "react-redux";
+
+import { registerUser } from '../actions/index'
 
 function Copyright() {
   return (
@@ -52,23 +56,32 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Register(props) {
+const Register = props => {
   const classes = useStyles();
 
-  const [note, setNote] = useState({
-
+  const [user, setUser] = useState({
+    phone: "",
+    username: "",
+    password: "",
+    user_id: Date.now()
   });
+
   const handlerChange = event => {
-    setNote({ ...note, [event.target.name]: event.target.value });
+    event.preventDefault()
+    console.log('username and password change',user);
+    setUser({ ...user, [event.target.name]: event.target.value });
   };
+  const handlePhoneChange = value => {
+    setUser({ phone:value })
+    console.log('phone change', user);
+  }
+
   const submitHandler = event => {
+
     event.preventDefault();
-    const newNote = {
-      ...note,
-      id: Date.now()
-    };
-    setNote(newNote);
-    console.log(note)
+     setUser();
+     // props.registerUser(props.user)
+    console.log('submit new user',event)
   };
 
   return (
@@ -76,29 +89,45 @@ export default function Register(props) {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sign in
+          Register
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            required ="true"
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            name="username"
+            value={props.username}
+            label="Username"
+            type="text"
+            id="username"
+            autoComplete="current-password"
             onChange={handlerChange}
+          />
+        <MuiPhoneNumber
+            defaultCountry={'us'}
+            variant="outlined"
+            margin="normal"
+            required="true"
+            fullWidth
+            name="phone"
+            label="Phone"
+            type="phone"
+            value={props.phone}
+            id="phone"
+            autoComplete="phone-password"
+            onChange={handlePhoneChange}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            required="true"
             fullWidth
             name="password"
             label="Password"
             type="password"
+            value={props.password}
             id="password"
             autoComplete="current-password"
             onChange={handlerChange}
@@ -110,7 +139,7 @@ export default function Register(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Register
           </Button>
           <Grid container>
             <Grid item xs>
@@ -127,3 +156,16 @@ export default function Register(props) {
     </Container>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+const mapDispatchToProps = {
+  registerUser
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);

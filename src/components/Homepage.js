@@ -6,7 +6,7 @@ const Homepage = () => {
   if (hasToken) {
     return <Redirect to="/dashboard" />;
   } else {
-    return <Redirect to="/account/login" />;
+    return <Redirect to="/login" />;
   }
 };
 
