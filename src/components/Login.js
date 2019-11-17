@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,8 +8,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import Register from "./Register";
+import { withStyles } from "@material-ui/core/styles";
+
 
 
 function Copyright() {
@@ -51,7 +50,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
+const StyledButton = withStyles({
+  root: {
+    background: "#078B75",
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    height: 48,
+    padding: "0 30px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+  }
+})(Button);
 
 export default function Login(props) {
   const classes = useStyles();
@@ -104,18 +113,18 @@ export default function Login(props) {
             autoComplete="current-password"
             onChange={handlerChange}
           />
-          <Button
+          <StyledButton
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="inherited"
             className={classes.submit}
           >
             Sign in
-          </Button>
+          </StyledButton>
           <Grid container>
             <Grid item xs>
-              <Link component={Register} to="./Register">
+              <Link >
                 {"Don't have an account? Register"}
               </Link>
             </Grid>

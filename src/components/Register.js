@@ -1,63 +1,69 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import SvgIcon from '@material-ui/core/SvgIcon';
-
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { withStyles } from "@material-ui/core/styles";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         Water My Plants
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.white,
-    },
+      backgroundColor: theme.palette.common.white
+    }
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
-
+const StyledButton = withStyles({
+  root: {
+    background: "#078B75",
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    height: 48,
+    padding: "0 30px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+  }
+})(Button);
 
 export default function Register(props) {
   const classes = useStyles();
 
-  const [note, setNote] = useState({
-
-  });
+  const [note, setNote] = useState({});
   const handlerChange = event => {
     setNote({ ...note, [event.target.name]: event.target.value });
   };
@@ -68,7 +74,7 @@ export default function Register(props) {
       id: Date.now()
     };
     setNote(newNote);
-    console.log(note)
+    console.log(note);
   };
 
   return (
@@ -76,7 +82,7 @@ export default function Register(props) {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sign in
+          Register
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
           <TextField
@@ -103,7 +109,7 @@ export default function Register(props) {
             autoComplete="current-password"
             onChange={handlerChange}
           />
-          <Button
+          <StyledButton
             type="submit"
             fullWidth
             variant="contained"
@@ -111,11 +117,11 @@ export default function Register(props) {
             className={classes.submit}
           >
             Sign In
-          </Button>
+          </StyledButton>
           <Grid container>
             <Grid item xs>
               <Link href="" variant="body2">
-                {"Don't have an account? Register now"}
+                {"Already have an account? Sign in"}
               </Link>
             </Grid>
           </Grid>
