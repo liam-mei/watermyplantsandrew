@@ -80,7 +80,7 @@ const Register = props => {
 
     event.preventDefault();
      setUser();
-     // props.registerUser(props.user)
+    props.registerUser(props.user)
     console.log('submit new user',event)
   };
 
@@ -91,7 +91,7 @@ const Register = props => {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit={props.submitHandler} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
