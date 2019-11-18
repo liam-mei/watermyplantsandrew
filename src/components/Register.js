@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -12,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import MuiPhoneNumber from 'material-ui-phone-number'
+import { withStyles } from "@material-ui/core/styles";
 
 import { connect } from "react-redux";
 
@@ -166,7 +166,7 @@ const Register = props => {
           >
             Register
     
-          </Button>
+          </StyledButton>
           <Grid container>
             <Grid item xs>
               <Link href="" variant="body2">
@@ -197,4 +197,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Register);
-
