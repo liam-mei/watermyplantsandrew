@@ -5,43 +5,35 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const authenticateUser = ({ username, password }) => dispatch => {
-  dispatch({ type: LOGIN_REQUEST });
+export function authenticateUser (userData,props) {
 
-  API.post("/login", {
-    username,
-    password
-  })
+  return dispatch => {
+    dispatch({ type: LOGIN_REQUEST });
+
+  API().post("/login", userData)
     .then(response => {
-      localStorage.setItem("token", response.data.token);
-
-      dispatch({ type: LOGIN_SUCCESS });
+      dispatch({ type: LOGIN_SUCCESS, payload: response.data });
       dispatch(push("/dashboard"));
     })
     .catch(error =>
       dispatch({
         type: LOGIN_FAILURE,
-        errorMessage: error.response.data.message
+        payload: error
       })
     );
-};
+}};
 
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
-export const registerUser = ({ username, password, phone }) => dispatch => {
+export const registerUser = (userData) => dispatch => {
   dispatch({ type: REGISTER_REQUEST });
 
-  API.post("/register", {
-    username,
-    password,
-    phone,
-  })
+  API().post("/register", userData)
     .then(response => {
-      localStorage.setItem("token", response.data.token);
-      dispatch({ type: LOGIN_SUCCESS });
-      dispatch(push("/dashboard"));
+      dispatch({ type: REGISTER_SUCCESS, payload: response.data });
+      dispatch(push("/login"));
     })
     .catch(error =>
       dispatch({
@@ -49,4 +41,19 @@ export const registerUser = ({ username, password, phone }) => dispatch => {
         errorMessage: error.response.data.message
       })
     );
+  // dispatch({type: LOGIN_REQUEST});
+  // API().post("/login", {
+  //   username: props.
+  // })
+  //   .then(response => {
+  //     dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+  //     dispatch(push("/dashboard"));
+  //   })
+  //   .catch(error =>
+  //     dispatch({
+  //       type: LOGIN_FAILURE,
+  //       payload: error
+  //     })
+  //   );
 };
+

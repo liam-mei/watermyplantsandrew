@@ -15,7 +15,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { connect } from "react-redux";
 
-import { registerUser } from '../actions/index'
+import { registerUser } from '../actions/auth'
 
 
 function Copyright() {
@@ -75,7 +75,6 @@ const Register = props => {
     username: "",
     password: "",
     phone: "",
-    user_id: Date.now()
   });
 
 
@@ -85,26 +84,25 @@ const Register = props => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
   const handlePhoneChange = value => {
-    setUser({ phone:value })
+    setUser({ ...user, phone:value })
     console.log('phone change', user);
   }
 
   const submitHandler = event => {
-
     event.preventDefault();
-
-     setUser();
     props.registerUser(user)
+    console.log(user)
   };
-
+  
   return (
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <form className={classes.form} onSubmit={props.submitHandler} noValidate>
+        <form className={classes.form} onSubmit={submitHandler} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -145,7 +143,7 @@ const Register = props => {
             autoComplete="current-password"
             onChange={handlerChange}
           />
-          <TextField
+          {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -156,7 +154,7 @@ const Register = props => {
             autoComplete="phone"
             autoFocus
             onChange={handlerChange}
-          />
+          /> */}
           <StyledButton
             type="submit"
             fullWidth
@@ -184,15 +182,16 @@ const Register = props => {
   );
 }
 
-
 function mapStateToProps(state) {
   return {
     user: state.user,
   };
 }
+
 const mapDispatchToProps = {
   registerUser
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

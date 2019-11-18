@@ -8,17 +8,18 @@ export const FETCH_PLANTS_FAILURE = "FETCH_PLANTS_FAILURE";
 export const getPlants = () => dispatch => {
   dispatch({ type: FETCH_PLANTS_REQUEST });
 
-  API.get("/plants")
+  API().get(`/dashboard/${localStorage.getItem("userID")}`)
     .then(response => {
+      console.log(response.data)
       dispatch({
         type: FETCH_PLANTS_SUCCESS,
-        plantsList: response.data.plants
+        payload: response.data
       });
     })
     .catch(error =>
       dispatch({
         type: FETCH_PLANTS_FAILURE,
-        errorMessage: error.response.data.message
+        errorMessage: error
       })
     );
 };

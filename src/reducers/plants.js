@@ -1,5 +1,6 @@
 import * as actions from "../actions";
 
+
 const initialState = {
   plantList: [],
   currentPlant: {
@@ -21,14 +22,14 @@ export const plantReducer = (state = initialState, action) => {
     case actions.FETCH_PLANTS_REQUEST:
       return {
         ...state,
-        plantList: [],
         isFetchingPlants: true
       };
 
     case actions.FETCH_PLANTS_SUCCESS:
+      console.log(action.payload)
       return {
         ...state,
-        plantList: action.plantList,
+        plantList: [...action.payload],
         isFetchingPlants: false
       };
 
