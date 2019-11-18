@@ -8,7 +8,7 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const authenticateUser = ({ username, password }) => dispatch => {
   dispatch({ type: LOGIN_REQUEST });
 
-  API.post("/auth/login", {
+  API.post("/login", {
     username,
     password
   })
@@ -33,14 +33,13 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const registerUser = ({ username, password, phone }) => dispatch => {
   dispatch({ type: REGISTER_REQUEST });
 
-  API.post("/auth/register", {
+  API.post("/register", {
     username,
     password,
-    phone
+    phone,
   })
     .then(response => {
       localStorage.setItem("token", response.data.token);
-
       dispatch({ type: LOGIN_SUCCESS });
       dispatch(push("/dashboard"));
     })

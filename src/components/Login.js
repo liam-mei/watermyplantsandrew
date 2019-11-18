@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +11,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Register from "./Register";
+import { Link } from 'react-router-dom'
+
+import { connect } from "react-redux";
+
+import {authenticateUser} from '../actions/auth'
 
 function Copyright() {
   return (
@@ -62,21 +67,23 @@ const StyledButton = withStyles({
   }
 })(Button);
 
-export default function Login(props) {
+const Login = props => {
   const classes = useStyles();
 
-  const [note, setNote] = useState({});
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
+
   const handlerChange = event => {
-    setNote({ ...note, [event.target.name]: event.target.value });
+    event.preventDefault();
+    setUser({ ...user, [event.target.name]: event.target.value });
   };
   const submitHandler = event => {
     event.preventDefault();
-    const newNote = {
-      ...note,
-      id: Date.now()
-    };
-    setNote(newNote);
-    console.log(note);
+    setUser('')
+    props.authenticateUser(props.user)
+    console.log(user)
   };
 
   return (
@@ -86,27 +93,29 @@ export default function Login(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit={props.submitHandler} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            required ="true"
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            name="username"
+            value={props.username}
+            label="Username"
+            type="text"
+            id="username"
+            autoComplete="current-password"
             onChange={handlerChange}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            required="true"
             fullWidth
             name="password"
             label="Password"
             type="password"
+            value={props.password}
             id="password"
             autoComplete="current-password"
             onChange={handlerChange}
@@ -134,7 +143,9 @@ export default function Login(props) {
           </StyledButton>
           <Grid container>
             <Grid item xs>
-              <Link>{"Don't have an account? Register"}</Link>
+              <Link to="/Register">
+                {"Don't have an account? Register"}
+              </Link>
             </Grid>
           </Grid>
         </form>
@@ -145,3 +156,17 @@ export default function Login(props) {
     </Container>
   );
 }
+
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+const mapDispatchToProps = {
+  authenticateUser
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

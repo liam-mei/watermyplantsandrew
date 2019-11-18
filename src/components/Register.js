@@ -1,14 +1,22 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { withStyles } from "@material-ui/core/styles";
+
+import React, { useState } from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import MuiPhoneNumber from 'material-ui-phone-number'
+
+import { connect } from "react-redux";
+
+import { registerUser } from '../actions/index'
+
 
 function Copyright() {
   return (
@@ -60,21 +68,33 @@ const StyledButton = withStyles({
   }
 })(Button);
 
-export default function Login(props) {
+const Register = props => {
   const classes = useStyles();
 
-  const [note, setNote] = useState({});
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    phone: "",
+    user_id: Date.now()
+  });
+
+
   const handlerChange = event => {
-    setNote({ ...note, [event.target.name]: event.target.value });
+    event.preventDefault()
+    console.log('username and password change',user);
+    setUser({ ...user, [event.target.name]: event.target.value });
   };
+  const handlePhoneChange = value => {
+    setUser({ phone:value })
+    console.log('phone change', user);
+  }
+
   const submitHandler = event => {
+
     event.preventDefault();
-    const newNote = {
-      ...note,
-      id: Date.now()
-    };
-    setNote(newNote);
-    console.log(note);
+
+     setUser();
+    props.registerUser(user)
   };
 
   return (
@@ -84,27 +104,43 @@ export default function Login(props) {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit={props.submitHandler} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            required ="true"
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            name="username"
+            value={props.username}
+            label="Username"
+            type="text"
+            id="username"
+            autoComplete="current-password"
             onChange={handlerChange}
+          />
+        <MuiPhoneNumber
+            defaultCountry={'us'}
+            variant="outlined"
+            margin="normal"
+            required="true"
+            fullWidth
+            name="phone"
+            label="Phone"
+            type="phone"
+            value={props.phone}
+            id="phone"
+            autoComplete="phone-password"
+            onChange={handlePhoneChange}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            required="true"
             fullWidth
             name="password"
             label="Password"
             type="password"
+            value={props.password}
             id="password"
             autoComplete="current-password"
             onChange={handlerChange}
@@ -129,10 +165,14 @@ export default function Login(props) {
             className={classes.submit}
           >
             Register
-          </StyledButton>
+    
+          </Button>
           <Grid container>
             <Grid item xs>
-              <Link>{"Already have an account? Sign in"}</Link>
+              <Link href="" variant="body2">
+                {"Already have an account? Log In."}
+              </Link>
+
             </Grid>
           </Grid>
         </form>
@@ -143,3 +183,18 @@ export default function Login(props) {
     </Container>
   );
 }
+
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+const mapDispatchToProps = {
+  registerUser
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);
+

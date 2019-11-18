@@ -26,6 +26,7 @@ export const authReducer = (state = initalState, action) => {
     case actions.REGISTER_REQUEST:
       return {
         ...state,
+        user: action.payload,
         errorMessage: ""
       };
 
