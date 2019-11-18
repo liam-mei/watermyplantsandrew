@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,53 +12,60 @@ import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Register from "./Register";
 
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         Water My Plants
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.white,
-    },
+      backgroundColor: theme.palette.common.white
+    }
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
-
+const StyledButton = withStyles({
+  root: {
+    background: "#078B75",
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    height: 48,
+    padding: "0 30px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+  }
+})(Button);
 
 export default function Login(props) {
   const classes = useStyles();
 
-  const [note, setNote] = useState({
-
-  });
+  const [note, setNote] = useState({});
   const handlerChange = event => {
     setNote({ ...note, [event.target.name]: event.target.value });
   };
@@ -70,7 +76,7 @@ export default function Login(props) {
       id: Date.now()
     };
     setNote(newNote);
-    console.log(note)
+    console.log(note);
   };
 
   return (
@@ -105,20 +111,30 @@ export default function Login(props) {
             autoComplete="current-password"
             onChange={handlerChange}
           />
-          <Button
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="phone"
+            label="Phone Number"
+            name="phone"
+            autoComplete="phone"
+            autoFocus
+            onChange={handlerChange}
+          />
+          <StyledButton
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="inherited"
             className={classes.submit}
           >
             Sign in
-          </Button>
+          </StyledButton>
           <Grid container>
             <Grid item xs>
-              <Link component={Register} to="./Register">
-                {"Don't have an account? Register"}
-              </Link>
+              <Link>{"Don't have an account? Register"}</Link>
             </Grid>
           </Grid>
         </form>
