@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Register from "./Register";
 import { Link } from 'react-router-dom'
+import { withStyles } from "@material-ui/core/styles";
 
 import { connect } from "react-redux";
 
