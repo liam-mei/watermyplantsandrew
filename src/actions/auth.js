@@ -43,18 +43,28 @@ export const registerUser = (userData) => dispatch => {
         errorMessage: error.response.data.message
       })
     );
-  // dispatch({type: LOGIN_REQUEST});
-  // API().post("/login", {
-  //   username: props.
-  // })
-  //   .then(response => {
-  //     dispatch({ type: LOGIN_SUCCESS, payload: response.data });
-  //     dispatch(push("/dashboard"));
-  //   })
-  //   .catch(error =>
-  //     dispatch({
-  //       type: LOGIN_FAILURE,
-  //       payload: error
-  //     })
-  //   );
 };
+
+// export const LOGOUT_REQUEST = "LOGIN_REQUEST";
+// export const LOGOUT_SUCCESS = "LOGIN_SUCCESS";
+// export const LOGOUT_FAILURE = "LOGIN_FAILURE";
+//
+// export function logOut (userData , props) {
+//
+//   return dispatch => {
+//     dispatch({ type: LOGOUT_REQUEST });
+//
+//   API().post("/login", userData)
+//     .then(response => {
+//       localStorage.removeItem('token', response.data.token);
+//       localStorage.removeItem("userID", response.data.id)
+//       dispatch({type: LOGOUT_SUCCESS})
+//       dispatch(push("/login"));
+//     })
+//     .catch(error =>
+//       dispatch({
+//         type: LOGOUT_FAILURE,
+//         payload: error
+//       })
+//     );
+// }};

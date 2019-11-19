@@ -9,6 +9,7 @@ const initalState = {
 };
 
 export const authReducer = (state = initalState, action) => {
+
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -46,6 +47,24 @@ export const authReducer = (state = initalState, action) => {
         errorMessage: action.errorMessage
       };
 
+    case action.LOGOUT_REQUEST:
+    return {
+      ...state,
+      errorMessage:""
+    }
+
+    case action.LOGOUT_SUCCESS:
+    return {
+      ...state,
+      user: action.payload,
+      errorMessage: action.payload
+    }
+    case actions.LOGOUT_FAILURE:
+      return {
+        ...state,
+        errorMessage: action.errorMessage
+      };
+      
     default:
       return state;
   }
