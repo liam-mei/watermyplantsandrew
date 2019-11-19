@@ -64,7 +64,7 @@ export const authReducer = (state = initalState, action) => {
         ...state,
         errorMessage: action.errorMessage
       };
-      
+
     default:
       return state;
   }

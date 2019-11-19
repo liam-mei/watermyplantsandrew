@@ -44,6 +44,7 @@ export const registerUser = (userData) => dispatch => {
       })
     );
 };
+<<<<<<< HEAD
 
 // export const LOGOUT_REQUEST = "LOGIN_REQUEST";
 // export const LOGOUT_SUCCESS = "LOGIN_SUCCESS";
@@ -68,3 +69,25 @@ export const registerUser = (userData) => dispatch => {
 //       })
 //     );
 // }};
+=======
+const ID = localStorage.getItem("userID");
+export const UPDATE_PHONE_REQUEST = "UPDATE_PHONE_REQUEST";
+export const UPDATE_PHONE_SUCCESS = "UPDATE_PHONE_SUCCESS";
+export const UPDATE_PHONE_FAILURE = "UPDATE_PHONE_FAILURE";
+
+export const updatePhone = (phone, props) => dispatch => {
+  dispatch({ type: UPDATE_PHONE_REQUEST });
+
+  API().put(`/dashboard/${ID}/user_settings`, phone)
+    .then(response => {
+      dispatch({ type: UPDATE_PHONE_SUCCESS, payload: response.data });
+      dispatch(push('/'));
+    })
+    .catch(error => {
+      dispatch({
+        type: UPDATE_PHONE_FAILURE,
+        errorMessage: error.response.data.message
+      });
+    });
+};
+>>>>>>> master
