@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -20,6 +20,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems } from "./listItems";
 import { withStyles } from "@material-ui/core/styles";
+
+import { connect } from "react-redux";
+import {getPlants} from "../actions/plants"
 
 function Copyright() {
   return (
@@ -127,9 +130,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Dashboard() {
+function Dashboard(props) {
+  useEffect(()=>{
+    props.getPlants()
+},[])
+
+console.log(props)
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -195,23 +203,12 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Plant 1 */}
-            <Grid item lg={4} md={7} xs={10}>
-              <Paper className={fixedHeightPaper}>{/* Plant 1 Info */}</Paper>
-            </Grid>
-            {/* Plant 2  */}
-            <Grid item lg={4} md={7} xs={10}>
-              <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item lg={4} md={7} xs={10}>
-              <Paper className={fixedHeightPaper}>{/* <Orders /> */}</Paper>
-            </Grid>
-            <Grid item lg={4} md={7} xs={10}>
-              <Paper className={fixedHeightPaper}>{/* <Orders /> */}</Paper>
-            </Grid>
-            <Grid item lg={4} md={7} xs={10}>
-              <Paper className={fixedHeightPaper}>{/* <Orders /> */}</Paper>
-            </Grid>
+            {props.plants.map((plant)=> 
+              <Grid item lg={4} md={7} xs={10}>
+                <Paper className={fixedHeightPaper}>{plant.name},{plant.location},{plant.type}</Paper>
+              </Grid>
+            )}
+
           </Grid>
         </Container>
         <Copyright />
@@ -220,3 +217,19 @@ export default function Dashboard() {
   );
 }
 
+
+function mapStateToProps(state) {
+  console.log(state)
+  return {
+    plants: state.plants.plantList,
+  };
+}
+
+const mapDispatchToProps = {
+  getPlants
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

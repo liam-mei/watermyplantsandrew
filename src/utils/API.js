@@ -1,9 +1,15 @@
 import axios from "axios";
 
-export default axios.create({
+export function getToken() {
+	return localStorage.getItem("token")
+}
+
+export default function() { 
+  return axios.create({
   baseURL: "https://watermp.herokuapp.com/",
   headers: {
-    Authorization: `${localStorage.getItem("token")}`
+    Authorization: getToken()
   },
   responseType: "json"
-});
+})
+}

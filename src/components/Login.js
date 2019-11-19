@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import Register from "./Register";
 import { Link } from 'react-router-dom'
 import { withStyles } from "@material-ui/core/styles";
 
@@ -82,8 +81,7 @@ const Login = props => {
   };
   const submitHandler = event => {
     event.preventDefault();
-    setUser('')
-    props.authenticateUser(props.user)
+    props.authenticateUser(user)
     console.log(user)
   };
 
@@ -94,7 +92,7 @@ const Login = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={props.submitHandler} noValidate>
+        <form className={classes.form} onSubmit={submitHandler} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -119,18 +117,6 @@ const Login = props => {
             value={props.password}
             id="password"
             autoComplete="current-password"
-            onChange={handlerChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="phone"
-            label="Phone Number"
-            name="phone"
-            autoComplete="phone"
-            autoFocus
             onChange={handlerChange}
           />
           <StyledButton
@@ -164,6 +150,7 @@ function mapStateToProps(state) {
     user: state.user,
   };
 }
+
 const mapDispatchToProps = {
   authenticateUser
 };

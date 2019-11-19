@@ -1,38 +1,46 @@
 import * as actions from "../actions";
+import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/auth'
 
 const initalState = {
-  errorMessage: ""
+  errorMessage: "",
+  token: "",
+  user: null,
 };
 
 export const authReducer = (state = initalState, action) => {
   switch (action.type) {
-    case actions.LOGIN_REQUEST:
+    case LOGIN_REQUEST:
       return {
         ...state,
         errorMessage: ""
       };
 
-    case actions.LOGIN_SUCCESS:
-      return {
-        ...state
-      };
-
-    case actions.LOGIN_FAILURE:
+    case LOGIN_SUCCESS:
+        console.log(action.payload)
+        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("userID", action.payload.id)
       return {
         ...state,
-        errorMessage: action.errorMessage
+        token: action.payload
+      };
+
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        errorMessage: action.payload
       };
 
     case actions.REGISTER_REQUEST:
       return {
         ...state,
-        user: action.payload,
         errorMessage: ""
       };
 
     case actions.REGISTER_SUCCESS:
       return {
-        ...state
+        ...state,
+        user: action.payload,
+        errorMessage: action.payload
       };
 
     case actions.REGISTER_FAILURE:
@@ -45,3 +53,4 @@ export const authReducer = (state = initalState, action) => {
       return state;
   }
 };
+
