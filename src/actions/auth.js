@@ -5,14 +5,16 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export function authenticateUser (userData,props) {
+export function authenticateUser (userData , props) {
 
   return dispatch => {
     dispatch({ type: LOGIN_REQUEST });
 
   API().post("/login", userData)
     .then(response => {
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem("userID", response.data.id)
+      dispatch({type: LOGIN_SUCCESS})
       dispatch(push("/dashboard"));
     })
     .catch(error =>
@@ -56,4 +58,3 @@ export const registerUser = (userData) => dispatch => {
   //     })
   //   );
 };
-
