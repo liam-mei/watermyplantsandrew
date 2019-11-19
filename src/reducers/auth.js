@@ -1,4 +1,5 @@
 import * as actions from "../actions";
+
 import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/auth'
 
 const initalState = {
@@ -16,12 +17,8 @@ export const authReducer = (state = initalState, action) => {
       };
 
     case LOGIN_SUCCESS:
-        console.log(action.payload)
-        localStorage.setItem("token", action.payload.token);
-        localStorage.setItem("userID", action.payload.id)
       return {
         ...state,
-        token: action.payload
       };
 
     case LOGIN_FAILURE:
@@ -53,4 +50,3 @@ export const authReducer = (state = initalState, action) => {
       return state;
   }
 };
-
