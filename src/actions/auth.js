@@ -44,32 +44,6 @@ export const registerUser = (userData) => dispatch => {
       })
     );
 };
-<<<<<<< HEAD
-
-// export const LOGOUT_REQUEST = "LOGIN_REQUEST";
-// export const LOGOUT_SUCCESS = "LOGIN_SUCCESS";
-// export const LOGOUT_FAILURE = "LOGIN_FAILURE";
-//
-// export function logOut (userData , props) {
-//
-//   return dispatch => {
-//     dispatch({ type: LOGOUT_REQUEST });
-//
-//   API().post("/login", userData)
-//     .then(response => {
-//       localStorage.removeItem('token', response.data.token);
-//       localStorage.removeItem("userID", response.data.id)
-//       dispatch({type: LOGOUT_SUCCESS})
-//       dispatch(push("/login"));
-//     })
-//     .catch(error =>
-//       dispatch({
-//         type: LOGOUT_FAILURE,
-//         payload: error
-//       })
-//     );
-// }};
-=======
 const ID = localStorage.getItem("userID");
 export const UPDATE_PHONE_REQUEST = "UPDATE_PHONE_REQUEST";
 export const UPDATE_PHONE_SUCCESS = "UPDATE_PHONE_SUCCESS";
@@ -90,4 +64,3 @@ export const updatePhone = (phone, props) => dispatch => {
       });
     });
 };
->>>>>>> master

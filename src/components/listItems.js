@@ -13,7 +13,6 @@ import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -26,8 +25,10 @@ import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-import { logOut, authenticateUser } from "../actions/index"
+import { Link } from 'react-router-dom'
+import {
+  //logOut,
+  authenticateUser } from "../actions/index"
 import {connect} from 'react-redux'
 
 const Auth = new authenticateUser()
@@ -47,18 +48,23 @@ function MainListItems(props) {
     <div>
     <Divider />
     <List>
+
     <ListItem button>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
       <ListItemText primary={`Hello, ${props.username}`}/>
     </ListItem>
+
+    <Link to='/plant/add'>
     <ListItem button>
       <ListItemIcon>
         <AddIcon />
       </ListItemIcon>
       <ListItemText primary="Add a plant" />
     </ListItem>
+    </Link>
+    
     <ListItem button>
       <ListItemIcon>
         <EditIcon />
@@ -91,7 +97,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  logOut
+  //logOut
 };
 export default connect(
   mapStateToProps,
