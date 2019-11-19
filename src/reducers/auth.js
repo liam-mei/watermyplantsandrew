@@ -45,7 +45,18 @@ export const authReducer = (state = initalState, action) => {
         ...state,
         errorMessage: action.errorMessage
       };
-
+    case actions.UPDATE_PHONE_REQUEST:
+      return {
+        ...state
+      }
+    case actions.UPDATE_PHONE_SUCCESS:
+      return { 
+        ...state 
+      };
+    case actions.UPDATE_PLANT_FAILURE:
+      return { 
+        ...state 
+      };
     default:
       return state;
   }

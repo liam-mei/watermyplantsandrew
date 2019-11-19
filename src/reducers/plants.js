@@ -47,7 +47,12 @@ export const plantReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetchingPlant: false,
-        currentPlant: action.currentPlant
+        currentPlant: {
+          id: action.payload.id,
+          name: action.payload.name,
+          location: action.payload.location,
+          type: action.payload.type,
+        }
       };
 
     case actions.FETCH_PLANT_FAILURE:
@@ -66,6 +71,15 @@ export const plantReducer = (state = initialState, action) => {
     case actions.CREATE_PLANT_FAILURE:
       return { ...state, errorMessage: action.errorMessage };
 
+    case actions.UPDATE_PLANT_REQUEST:
+      return { ...state };
+
+    case actions.UPDATE_PLANT_SUCCESS:
+      return { ...state };
+
+    case actions.UPDATE_PLANT_FAILURE:
+      return { ...state, errorMessage: action.errorMessage };
+
     case actions.DELETE_PLANT_REQUEST:
       return { ...state };
 
@@ -79,3 +93,45 @@ export const plantReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const plantScheduleReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actions.FETCH_PLANT_SCHEDULE_REQUEST:
+      return { ...state, isFetchingPlant: true };
+
+    case actions.FETCH_PLANT_SCHEDULE_SUCCESS:
+      return {
+        ...state,
+        isFetchingPlant: false,
+        currentPlant: {
+          water_schedule: action.payload
+        }
+      };
+
+    case actions.FETCH_PLANT_SCHEDULE_FAILURE:
+      return {
+        ...state,
+        isFetchingPlant: false,
+        errorMessage: action.errorMessage
+      };
+    case actions.CREATE_PLANT_SCHEDULE_REQUEST:
+      return { ...state };
+
+    case actions.CREATE_PLANT_SCHEDULE_SUCCESS:
+      return { ...state };
+
+    case actions.CREATE_PLANT_SCHEDULE_FAILURE:
+      return { ...state, errorMessage: action.errorMessage };
+
+    case actions.UPDATE_PLANT_SCHEDULE_REQUEST:
+      return { ...state };
+
+    case actions.UPDATE_PLANT_SCHEDULE_SUCCESS:
+      return { ...state };
+
+    case actions.UPDATE_PLANT_SCHEDULE_FAILURE:
+      return { ...state, errorMessage: action.errorMessage };
+
+    default:
+      return state;
+  }}
