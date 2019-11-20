@@ -6,17 +6,24 @@ plant plantReducer object
 
 what is the best logic for the 3ids. how can this be helpful?
 
+How to use props.history.params w/ connected-react-router.
+
 ------------------------------
 actions still needed:
 
 notifications
-update phone number
+√update phone number
 log out
-Update plant
-Fetch water_schedule
+√Update plant
+√Fetch water_schedule
+√update water_schedule
 ------------------------
 issues:
-[] Register and Login get 304 code on submitHandler
+[]
+
+[]
+
+[√] Register and Login get 304 code on submitHandler
 Resolution:
 
 [√] 'redux-form-material-ui' - When imported to register gives error that files relating to redux-form-material-ui can not be found in node_modules. We are using yarn for this project and the docs for this dependency only list npm commands. Do some packages only run on npm or yarn?
