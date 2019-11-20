@@ -15,7 +15,7 @@ export function authenticateUser (userData , props) {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem("userID", response.data.id)
       dispatch({type: LOGIN_SUCCESS})
-      dispatch(push("/dashboard"));
+      dispatch(push("/"));
     })
     .catch(error =>
       dispatch({
