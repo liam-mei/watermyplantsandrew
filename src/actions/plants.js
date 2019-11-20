@@ -52,13 +52,34 @@ export const CREATE_PLANT_REQUEST = "CREATE_PLANT_REQUEST";
 export const CREATE_PLANT_SUCCESS = "CREATE_PLANT_SUCCESS";
 export const CREATE_PLANT_FAILURE = "CREATE_PLANT_FAILURE";
 
-export const createPlant = addPlantObject => dispatch => {
+export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
+export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
+export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
+
+export const createPlant = plant => dispatch => {
   dispatch({ type: CREATE_PLANT_REQUEST });
 
-  API().post(`/dashboard/${ID}/plants/add`, addPlantObject)
+  API().post(`/dashboard/${ID}/plants/add`, {"name": plant.name, "location": plant.location, "type": plant.type})
     .then(response => {
       dispatch({ type: CREATE_PLANT_SUCCESS, payload: response.data });
       dispatch(push('/'));
+      const plantID = response.data.id
+
+      const createPlantSchedule = (schedule, plantID) => dispatch => {
+        dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
+
+        API().post(`/dashboard/${ID}/my_plant/${plantID}/add_schedule`, {"water_schedule": plant.water_schedule})
+          .then(response => {
+            dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
+            dispatch(push('/'));
+          })
+          .catch(error => {
+            dispatch({
+              type: CREATE_PLANT_SCHEDULE_FAILURE,
+              errorMessage: error.response.data.message
+            });
+          });
+    };
     })
     .catch(error => {
       dispatch({
@@ -108,25 +129,25 @@ export const deletePlant = (props) => dispatch => {
     );
 };
 
-export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
-export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
-export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
+// export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
+// export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
+// export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
 
-export const createPlantSchedule = (schedule, props) => dispatch => {
-  dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
+// export const createPlantSchedule = (schedule, props) => dispatch => {
+//   dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
 
-  API().post(`/dashboard/${ID}/my_plant/${props.match.params}/add_schedule`, schedule)
-    .then(response => {
-      dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
-      dispatch(push('/'));
-    })
-    .catch(error => {
-      dispatch({
-        type: CREATE_PLANT_SCHEDULE_FAILURE,
-        errorMessage: error.response.data.message
-      });
-    });
-};
+//   API().post(`/dashboard/${ID}/my_plant/${props.match.params}/add_schedule`, schedule)
+//     .then(response => {
+//       dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
+//       dispatch(push('/'));
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: CREATE_PLANT_SCHEDULE_FAILURE,
+//         errorMessage: error.response.data.message
+//       });
+//     });
+// };
 
 export const FETCH_PLANT_SCHEDULE_REQUEST = "FETCH_PLANT_SCHEDULE_REQUEST";
 export const FETCH_PLANT_SCHEDULE_SUCCESS = "FETCH_PLANT_SCHEDULE_SUCCESS";
