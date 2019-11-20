@@ -19,7 +19,7 @@ const App = () => (
         <Route exact path="/" component={Homepage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/plant/add" component={AddPlant} />
         <PrivateRoute exact path="/plant/:id" component={PlantCard} />
         <PrivateRoute
