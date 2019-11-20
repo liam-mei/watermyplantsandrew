@@ -43,20 +43,6 @@ export const registerUser = (userData) => dispatch => {
         errorMessage: error.response.data.message
       })
     );
-  // dispatch({type: LOGIN_REQUEST});
-  // API().post("/login", {
-  //   username: props.
-  // })
-  //   .then(response => {
-  //     dispatch({ type: LOGIN_SUCCESS, payload: response.data });
-  //     dispatch(push("/dashboard"));
-  //   })
-  //   .catch(error =>
-  //     dispatch({
-  //       type: LOGIN_FAILURE,
-  //       payload: error
-  //     })
-  //   );
 };
 const ID = localStorage.getItem("userID");
 export const UPDATE_PHONE_REQUEST = "UPDATE_PHONE_REQUEST";

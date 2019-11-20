@@ -5,6 +5,13 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom'
@@ -79,14 +86,18 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-const Login = props => {
+const AddPlant = props => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
   const handlerChange = event => {
     event.preventDefault();
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -133,18 +144,23 @@ const Login = props => {
             id="plantName"
             onChange={handlerChange}
           />
-          <TextField
+
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardTimePicker
             variant="standard"
             margin="normal"
             required="true"
             fullWidth
-            name="h20 Frequency"
-            label="h20Frequency"
-            type="text"
-            value={props.h20Frequency}
             id="h20Frequency"
-            onChange={handlerChange}
-          />
+            label="h20Frequency"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change time',
+            }}
+            />
+        </MuiPickersUtilsProvider>
+
           <Box
             text="Back to Dashboard"
             color="white"
@@ -185,4 +201,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(AddPlant);
