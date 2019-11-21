@@ -11,6 +11,7 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import PlantCard from "./components/PlantCard";
 import AddPlant from "./components/AddPlant";
+import AddPlantWater from "./components/AddPlantWater";
 import SuccessSnackbar from "./components/Notifications";
 
 const App = () => (
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="/register" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/plant/add" component={AddPlant} />
+        <PrivateRoute path="/plant/add/:id/water" component={AddPlantWater} />
         <PrivateRoute exact path="/plant/:id" component={PlantCard} />
         <PrivateRoute path="/plant/notifications" component={<SuccessSnackbar/>} />
         <PrivateRoute

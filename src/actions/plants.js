@@ -59,7 +59,7 @@ export const createPlant = plant => dispatch => {
     .then(response => {
       dispatch({ type: CREATE_PLANT_SUCCESS, payload: response.data });
       updatePlant(response.data)
-      // dispatch(push('/'));
+      dispatch(push(`/plant/add/${ID}/water`));
     })
     .catch(error => {
       dispatch({

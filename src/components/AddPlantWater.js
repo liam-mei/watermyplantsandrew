@@ -87,7 +87,7 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-const AddPlant = props => {
+const AddPlantWater = props => {
   const classes = useStyles();
   console.log(props)
 
@@ -97,7 +97,6 @@ const AddPlant = props => {
     name: "",
     location: "",
     type: "",
-    water_schedule: selectedDate
   });
 
 
@@ -136,47 +135,25 @@ const AddPlant = props => {
 
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Add-A-Plant
+          Add-A-Water-Schedule
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
-          <TextField
-            variant="standard"
-            margin="normal"
-            required="true"
-            fullWidth
-            name="name"
-            value={plant.name}
-            label="Plant Name"
-            type="text"
-            id="plantName"
-            onChange={handlerChange}
-          />
 
-          <TextField
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardTimePicker
             variant="standard"
             margin="normal"
             required="true"
             fullWidth
-            name="type"
-            value={plant.type}
-            label="Plant Type"
-            type="text"
-            id="plantName"
-            onChange={handlerChange}
-          />
-
-          <TextField
-            variant="standard"
-            margin="normal"
-            required="true"
-            fullWidth
-            name="location"
-            value={plant.location}
-            label="Plant Location"
-            type="text"
-            id="plantLocation"
-            onChange={handlerChange}
-          />
+            id="h20Frequency"
+            label="h20Frequency"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change time',
+            }}
+            />
+        </MuiPickersUtilsProvider>
 
           <Box
             text="Back to Dashboard"
@@ -193,7 +170,7 @@ const AddPlant = props => {
               color="inherited"
               className={classes.submit}
             >
-              Schedule water time
+              Save
           </StyledButton>
           </Box>
         </form>
@@ -214,4 +191,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps
-)(AddPlant);
+)(AddPlantWater);
