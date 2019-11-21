@@ -27,7 +27,11 @@ export default function DeletePlant() {
         <DialogTitle id="alert-dialog-title">{"Delete Chinese Evergreen"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
+
             Are you sure you would like to delete this plant? This action cannot be undone.
+
+            Are you sure you would like to delete this plant? This action cannot be undone. 
+
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -41,4 +45,6 @@ export default function DeletePlant() {
       </Dialog>
     </div>
   );
+
 }
+
