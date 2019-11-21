@@ -45,12 +45,15 @@ function MainListItems(props) {
     <Divider />
     <List>
 
+    <Link to='/account'>
     <ListItem button>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary={`Hello, ${props.username}`}/>
+      <ListItemText primary={`Hello, `}/>
+      {/* ${props.user.username} */}
     </ListItem>
+    </Link>
 
     <Link to='/plant/add'>
     <ListItem button>
@@ -88,7 +91,7 @@ function MainListItems(props) {
 }
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    user: state.auth.user,
   };
 }
 

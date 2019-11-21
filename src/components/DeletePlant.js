@@ -5,7 +5,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-export default function DeletePlant() {
+import { deletePlant } from '../actions/plants'
+import { connect } from "react-redux";
+
+function DeleteMyPlant(id, props) {
+    const [state, setState] = React.useState(id)
+
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -13,6 +18,11 @@ export default function DeletePlant() {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(id)
+  const handleDelete = (event) => {
+    event.preventDefault();
+    id.deletePlant(state)
+  }
   return (
     <div>
       <Button variant="" color="primary" onClick={handleClickOpen}>
@@ -24,13 +34,11 @@ export default function DeletePlant() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete Chinese Evergreen"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Delete This Plant?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
 
             Are you sure you would like to delete this plant? This action cannot be undone.
-
-            Are you sure you would like to delete this plant? This action cannot be undone. 
 
           </DialogContentText>
         </DialogContent>
@@ -38,7 +46,7 @@ export default function DeletePlant() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleDelete} color="primary" autoFocus>
             Delete
           </Button>
         </DialogActions>
@@ -48,3 +56,11 @@ export default function DeletePlant() {
 
 }
 
+const mapDispatchToProps = {
+    deletePlant
+  };
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(DeleteMyPlant);

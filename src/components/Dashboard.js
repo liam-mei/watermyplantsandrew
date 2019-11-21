@@ -207,7 +207,7 @@ console.log(props)
             {/* Plant 1 */}
             {props.plants.map((plant)=>
               <Grid item lg={4} md={7} xs={10}>
-                <PlantCard plant={plant} className={fixedHeightPaper}/>
+                <PlantCard key={plant.id} id={plant.id} plant={plant} className={fixedHeightPaper}/>
               </Grid>
             )}
 
