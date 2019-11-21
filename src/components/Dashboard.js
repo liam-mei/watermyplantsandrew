@@ -20,7 +20,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./listItems";
 import { withStyles } from "@material-ui/core/styles";
-
+import PlantCard from "./PlantCard"
 import { connect } from "react-redux";
 import {getPlants} from "../actions/plants"
 
@@ -207,7 +207,7 @@ console.log(props)
             {/* Plant 1 */}
             {props.plants.map((plant)=>
               <Grid item lg={4} md={7} xs={10}>
-                <Paper className={fixedHeightPaper}>{plant.name},{plant.location},{plant.type}</Paper>
+                <PlantCard plant={plant} className={fixedHeightPaper}/>
               </Grid>
             )}
 

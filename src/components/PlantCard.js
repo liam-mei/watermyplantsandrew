@@ -10,13 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DeletePlant from  "./DeletePlant"
-
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
   },
 });
-export default function PlantCard() {
+export default function PlantCard(props) {
   const classes = useStyles();
   return (
     <div className="items-list-wrapper">
@@ -31,7 +30,7 @@ export default function PlantCard() {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-            Chinese Evergreen
+            {props.plant.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
          <AccessTimeIcon color="primary" fontSize="small" /> 1:30pm  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
