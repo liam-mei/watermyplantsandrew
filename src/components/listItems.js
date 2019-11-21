@@ -27,20 +27,16 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from 'react-router-dom'
 import {
-  //logOut,
+  logoutUser,
   authenticateUser } from "../actions/index"
 import {connect} from 'react-redux'
 
-const Auth = new authenticateUser()
 
 function MainListItems(props) {
 
   const handleLogout = event => {
     event.preventDefault()
-    // Remove the token from localStorage
-    localStorage.removeItem("token")
-    // Remove the user object from the Redux store
-    props.logOut()
+    props.logoutUser()
   }
 
   return(
@@ -64,7 +60,7 @@ function MainListItems(props) {
       <ListItemText primary="Add a plant" />
     </ListItem>
     </Link>
-    
+
     <ListItem button>
       <ListItemIcon>
         <EditIcon />
@@ -92,12 +88,12 @@ function MainListItems(props) {
 }
 function mapStateToProps(state) {
   return {
-    username: state.userData,
+    user: state.user,
   };
 }
 
 const mapDispatchToProps = {
-  //logOut
+  logoutUser
 };
 export default connect(
   mapStateToProps,

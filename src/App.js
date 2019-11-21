@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import PlantCard from "./components/PlantCard";
 import AddPlant from "./components/AddPlant";
 import EditPlant from "./components/EditPlant";
+import SuccessSnackbar from "./components/Notifications";
 
 const App = () => (
   <div className="app">
@@ -23,6 +24,7 @@ const App = () => (
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/plant/add" component={AddPlant} />
         <PrivateRoute exact path="/plant/:id" component={PlantCard} />
+        <PrivateRoute path="/plant/notifications" component={<SuccessSnackbar/>} />
         <PrivateRoute
           path="/plant/:id/edit"
           component={EditPlant}

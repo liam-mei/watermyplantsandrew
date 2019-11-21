@@ -18,7 +18,9 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
 });
+
 export default function PlantCard(props) {
+
   const classes = useStyles();
   return (
       
@@ -35,11 +37,13 @@ export default function PlantCard(props) {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
+
             {props.plant.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
          <AccessTimeIcon color="primary" fontSize="small" /> 1:30pm  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
             </Typography> 
+
           </CardContent>
         </CardActionArea>
         <CardActions>

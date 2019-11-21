@@ -139,6 +139,7 @@ function Dashboard(props) {
 console.log(props)
   const classes = useStyles();
   const [open, setOpen] = useState(true);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };

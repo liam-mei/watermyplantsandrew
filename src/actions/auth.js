@@ -1,6 +1,16 @@
 import { push } from "connected-react-router";
 import API from "../utils/API";
 
+export const LOGOUT_USER='LOGOUT_USER'
+
+export function logoutUser () {
+  return dispatch =>{
+    dispatch({type: LOGOUT_USER});
+    localStorage.removeItem('token')
+    dispatch(push('/login'))
+  }
+}
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
