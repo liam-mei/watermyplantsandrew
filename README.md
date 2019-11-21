@@ -1,3 +1,53 @@
+API TESTED ENDPOINTS
+____________________________________
+//LOGIN -- .post("https://watermp.herokuapp.com/login")
+{
+    "username": "jacobcalv",
+    "password": "123"
+}
+
+//REGISTER -- .post("https://watermp.herokuapp.com/register")
+{
+    "username": "jacobcalv",
+    "password": "123",
+    "phone": "1234567890"
+}
+
+//ADD PLANT -- .post("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/plants/add", "Authorization":"token")
+{
+    "name": "my favorite lily",
+    "location": "Kitchen Floor",
+    "type": "boat lily"
+}
+
+//ADD PLANT SCHEDULE -- .post("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANTS ID)/add_schedule", "Authorization":"token")
+
+ {
+    "water_schedule": "UNIX TIME ex. 1573698314 "
+ }
+//GET PLANT DATA (INDIVIDUAL) -- .get("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANTS ID)", "Authorization":"token")
+//GET PLANT DATA FOR USER ALL -- .get("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/", "Authorization":"token")
+//GET PLANT SCHEDULE (INDIVIDUAL) -- .get("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANTS ID)/schedules", "Authorization":"token")
+//UPDATE PLANT DATA (NOT SCHEDULE) -- .put("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANTS ID)/update", "Authorization":"token")
+{
+    "name": "weird Lily",
+    "location": "my Kitchen",
+    "type": "boat Lily"
+}
+//UPDATE PLANT WATER SCHEDULE -- .put("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANT ID)/update/(YOUR WATER SCHEDULE ID -- FOUND IN POST AND GET REQUEST FOR WATER SCHEDULE )", "Authorization":"token")
+{
+    "water_schedule": "UNIX TIME EX.1573698310"
+}
+//UPDATE YOUR PHONE NUMBER -- .put("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/user_settings", "Authorization":"token")
+{
+    "phone": (A NEW PHONE NUMBER = ) "1236544569"
+}
+//DELETE PLANT -- .delete("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANT ID)/remove", "Authorization":"token")
+_____________________________________
+
+
+
+
 Ask about:
 
 no token in register object
@@ -6,17 +56,24 @@ plant plantReducer object
 
 what is the best logic for the 3ids. how can this be helpful?
 
+How to use props.history.params w/ connected-react-router.
+
 ------------------------------
 actions still needed:
 
 notifications
-update phone number
+√update phone number
 log out
-Update plant
-Fetch water_schedule
+√Update plant
+√Fetch water_schedule
+√update water_schedule
 ------------------------
 issues:
-[] Register and Login get 304 code on submitHandler
+[] Remove default style on sidenav
+
+[]Create Snackbar
+
+[√] Register and Login get 304 code on submitHandler
 Resolution:
 
 [√] 'redux-form-material-ui' - When imported to register gives error that files relating to redux-form-material-ui can not be found in node_modules. We are using yarn for this project and the docs for this dependency only list npm commands. Do some packages only run on npm or yarn?

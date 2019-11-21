@@ -1,4 +1,5 @@
 import * as actions from "../actions";
+
 import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/auth'
 
 const initalState = {
@@ -8,6 +9,7 @@ const initalState = {
 };
 
 export const authReducer = (state = initalState, action) => {
+
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -16,12 +18,8 @@ export const authReducer = (state = initalState, action) => {
       };
 
     case LOGIN_SUCCESS:
-        console.log(action.payload)
-        localStorage.setItem("token", action.payload.token);
-        localStorage.setItem("userID", action.payload.id)
       return {
         ...state,
-        token: action.payload
       };
 
     case LOGIN_FAILURE:
@@ -49,8 +47,31 @@ export const authReducer = (state = initalState, action) => {
         errorMessage: action.errorMessage
       };
 
+      case action.LOGOUT_USER:
+        return{
+          ...state,
+          user:action.payload
+        }
+
+    // case action.LOGOUT_REQUEST:
+    // return {
+    //   ...state,
+    //   errorMessage:""
+    // }
+    //
+    // case action.LOGOUT_SUCCESS:
+    // return {
+    //   ...state,
+    //   user: action.payload,
+    //   errorMessage: action.payload
+    // }
+    // case actions.LOGOUT_FAILURE:
+    //   return {
+    //     ...state,
+    //     errorMessage: action.errorMessage
+    //   };
+
     default:
       return state;
   }
 };
-

@@ -5,14 +5,22 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom'
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { authenticateUser } from '../actions/auth'
+import { updatePlant } from '../actions/plants'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import Dashboard from "./Dashboard";
+import {plants} from '../reducers/plants'
 
 
 
@@ -51,14 +59,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
-  },
-  button: {
-    color: "#0097A7",
-    margin: theme.spacing(1),
-  },
-  input: {
-    display: 'none',
-  },
+  }
 }));
 
 const StyledButton = withStyles({
@@ -86,24 +87,24 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-
-
-const Login = props => {
+const AddPlant = props => {
   const classes = useStyles();
-
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
+  console.log(props)
+  
+  const [plant, setPlant] = useState({
+    name: "",
+    location: "",
+    type: "",
   });
-
+  
   const handlerChange = event => {
     event.preventDefault();
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setPlant({ ...plant, [event.target.name]: event.target.value });
   };
   const submitHandler = event => {
     event.preventDefault();
-    props.authenticateUser(user)
-    console.log(user)
+    props.updatePlant(plant)
+    console.log(plant)
   };
 
   return (
@@ -126,8 +127,8 @@ const Login = props => {
       </Link>
 
       <div className={classes.paper}>
-        <Typography component="h1" variant="h3">
-          Edit
+        <Typography component="h1" variant="h5">
+          Edit-A-Plant
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
           <TextField
@@ -135,32 +136,47 @@ const Login = props => {
             margin="normal"
             required="true"
             fullWidth
-            name="Plant Name"
-            value={props.plantName}
+            name="name"
+            value={plant.name}
             label="Plant Name"
             type="text"
             id="plantName"
             onChange={handlerChange}
           />
+
           <TextField
             variant="standard"
             margin="normal"
             required="true"
             fullWidth
-            name="h20 Frequency"
-            label="h20Frequency"
+            name="type"
+            value={plant.type}
+            label="Plant Type"
             type="text"
-            value={props.h20Frequency}
-            id="h20Frequency"
+            id="plantName"
             onChange={handlerChange}
           />
+
+          <TextField
+            variant="standard"
+            margin="normal"
+            required="true"
+            fullWidth
+            name="location"
+            value={plant.location}
+            label="Plant Location"
+            type="text"
+            id="plantLocation"
+            onChange={handlerChange}
+          />
+
           <Box
             text="Back to Dashboard"
             color="white"
             p={2}
-            position="absolute"
+            position="center"
             top={250}
-            left="43%"
+            left="100%"
             zIndex="tooltip"
           >
             <StyledButton
@@ -172,19 +188,9 @@ const Login = props => {
               Save
           </StyledButton>
           </Box>
-          <Box
-            color="white"
-            p={2}
-            position="absolute"
-            top={350}
-            left="40.5%"
-            zIndex="tooltip"
-          >
-            <Button className={classes.button}>X Delete Plant</Button>
-          </Box>
         </form>
       </div>
-      <Box mt={20}>
+      <Box mt={18}>
         <Copyright />
       </Box>
     </Container>
@@ -192,16 +198,12 @@ const Login = props => {
 }
 
 
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
+
 
 const mapDispatchToProps = {
-  authenticateUser
+  updatePlant
 };
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
-)(Login);
+)(AddPlant);

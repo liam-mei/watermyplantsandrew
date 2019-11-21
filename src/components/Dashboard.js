@@ -18,11 +18,12 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems } from "./listItems";
+import MainListItems from "./listItems";
 import { withStyles } from "@material-ui/core/styles";
-
+import PlantCard from "./PlantCard"
 import { connect } from "react-redux";
 import {getPlants} from "../actions/plants"
+
 
 function Copyright() {
   return (
@@ -138,6 +139,7 @@ function Dashboard(props) {
 console.log(props)
   const classes = useStyles();
   const [open, setOpen] = useState(true);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -194,18 +196,18 @@ console.log(props)
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-      </Drawer>
+
+        <MainListItems/>
+</Drawer>
+
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Plant 1 */}
-            {props.plants.map((plant)=> 
+            {props.plants.map((plant)=>
               <Grid item lg={4} md={7} xs={10}>
-                <Paper className={fixedHeightPaper}>{plant.name},{plant.location},{plant.type}</Paper>
+                <PlantCard plant={plant} className={fixedHeightPaper}/>
               </Grid>
             )}
 
