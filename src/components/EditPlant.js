@@ -87,12 +87,11 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-const AddPlant = props => {
+const EditPlant = props => {
   const classes = useStyles();
-  console.log(props)
   
   const [plant, setPlant] = useState({
-    id: props.id,
+    id: props.match.params.id,
     name: "",
     location: "",
     type: "",
@@ -207,4 +206,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps
-)(AddPlant);
+)(EditPlant);

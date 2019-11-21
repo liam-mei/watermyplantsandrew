@@ -75,7 +75,7 @@ export const UPDATE_PLANT_FAILURE = "UPDATE_PLANT_FAILURE";
 
 export const updatePlant = (plant) => dispatch => {
   dispatch({ type: UPDATE_PLANT_REQUEST });
-
+  console.log(plant)
   API().put(`/dashboard/${ID}/my_plant/${plant.id}/update`, {"name": plant.name, "location": plant.location, "type": plant.type})
     .then(response => {
       dispatch({ type: UPDATE_PLANT_SUCCESS, payload: response.data });
@@ -93,10 +93,10 @@ export const DELETE_PLANT_REQUEST = "DELETE_PLANT_REQUEST";
 export const DELETE_PLANT_SUCCESS = "DELETE_PLANT_SUCCESS";
 export const DELETE_PLANT_FAILURE = "DELETE_PLANT_FAILURE";
 
-export const deletePlant = (props) => dispatch => {
+export const deletePlant = (plant) => dispatch => {
   dispatch({ type: DELETE_PLANT_REQUEST });
-
-  API().delete(`/dashboard/${ID}/my_plant/${props.match.params}/remove"`)
+  console.log(plant.id)
+  API().delete(`/dashboard/${ID}/my_plant/${plant.id}/remove`)
     .then(response => {
       dispatch({ type: DELETE_PLANT_SUCCESS });
       dispatch(push("/"));

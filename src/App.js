@@ -7,6 +7,7 @@ import Homepage from "./components/Homepage";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Profile from "./components/Profile"
 
 import Dashboard from "./components/Dashboard";
 import PlantCard from "./components/PlantCard";
@@ -21,6 +22,7 @@ const App = () => (
         <Route exact path="/" component={Homepage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <PrivateRoute path='/account' component={Profile}/>
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/plant/add" component={AddPlant} />
         <PrivateRoute exact path="/plant/:id" component={PlantCard} />

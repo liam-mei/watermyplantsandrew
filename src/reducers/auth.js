@@ -20,6 +20,7 @@ export const authReducer = (state = initalState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        user: action.payload
       };
 
     case LOGIN_FAILURE:
