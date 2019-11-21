@@ -44,7 +44,9 @@ export const registerUser = (userData) => dispatch => {
       })
     );
 };
+
 const ID = localStorage.getItem("userID");
+
 export const UPDATE_PHONE_REQUEST = "UPDATE_PHONE_REQUEST";
 export const UPDATE_PHONE_SUCCESS = "UPDATE_PHONE_SUCCESS";
 export const UPDATE_PHONE_FAILURE = "UPDATE_PHONE_FAILURE";

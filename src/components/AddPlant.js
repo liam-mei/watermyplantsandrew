@@ -97,7 +97,7 @@ const AddPlant = props => {
     name: "",
     location: "",
     type: "",
-    water_schedule: {selectedDate}
+    water_schedule: selectedDate
   });
   
 
