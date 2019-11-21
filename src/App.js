@@ -11,6 +11,7 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import PlantCard from "./components/PlantCard";
 import AddPlant from "./components/AddPlant";
+import EditPlant from "./components/EditPlant";
 
 const App = () => (
   <div className="app">
@@ -24,7 +25,7 @@ const App = () => (
         <PrivateRoute exact path="/plant/:id" component={PlantCard} />
         <PrivateRoute
           path="/plant/:id/edit"
-          render={() => <div>Edit Plant</div>}
+          component={EditPlant}
         />
 
       </Switch>

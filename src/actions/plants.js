@@ -76,7 +76,7 @@ export const UPDATE_PLANT_FAILURE = "UPDATE_PLANT_FAILURE";
 export const updatePlant = (plant) => dispatch => {
   dispatch({ type: UPDATE_PLANT_REQUEST });
 
-  API().put(`/dashboard/${ID}/my_plant/${plant.id}/update`, {"water_schedule": "plant.water_schedule"})
+  API().put(`/dashboard/${ID}/my_plant/${plant.id}/update`, {"name": plant.name, "location": plant.location, "type": plant.type})
     .then(response => {
       dispatch({ type: UPDATE_PLANT_SUCCESS, payload: response.data });
       dispatch(push('/'));

@@ -92,6 +92,7 @@ const AddPlant = props => {
   console.log(props)
   
   const [plant, setPlant] = useState({
+    id: props.id,
     name: "",
     location: "",
     type: "",

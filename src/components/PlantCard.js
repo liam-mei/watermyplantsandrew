@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DeletePlant from  "./DeletePlant"
+import EditPlant from "./EditPlant"
+import {Route, Link} from "react-router-dom"
+
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
@@ -18,8 +21,10 @@ const useStyles = makeStyles({
 export default function PlantCard(props) {
   const classes = useStyles();
   return (
+      
     <div className="items-list-wrapper">
 <Card className={classes.card}>
+
         <CardActionArea>
           <CardMedia
             component="img"
@@ -38,9 +43,11 @@ export default function PlantCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
+            <Link to='/plant/:id/edit'>
           <Button size="small" color="primary">
             Edit
           </Button>
+          </Link>
           <Button size="small" color="primary">
           <DeletePlant />
           </Button>
