@@ -54,15 +54,11 @@ export const CREATE_PLANT_FAILURE = "CREATE_PLANT_FAILURE";
 
 export const createPlant = plant => dispatch => {
   dispatch({ type: CREATE_PLANT_REQUEST });
-
+  console.log(plant)
   API().post(`/dashboard/${ID}/plants/add`, {"name": plant.name, "location": plant.location, "type": plant.type, 'id':plant.id})
     .then(response => {
-
-
-
       dispatch({ type: CREATE_PLANT_SUCCESS, payload: response.data });
-      updatePlant(response.data)
-      dispatch(push(`/plant/${PlantID}/water`));
+      dispatch(push(`/plant/${response.data.id}/water`));
     })
     .catch(error => {
       dispatch({
@@ -116,10 +112,10 @@ export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
 export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
 export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
 
-export const createPlantSchedule = (water, props) => dispatch => {
+export const createPlantSchedule = (props) => dispatch => {
   dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
-
-  API().post(`/dashboard/${ID}/my_plant/${PlantID}/add_schedule`, {'plantID':water.plant_id, 'water':water.water_schedule, 'userID':water.user_id})
+  console.log(props)
+  API().post(`/dashboard/${ID}/my_plant/${props.plant_id}/add_schedule`, {'water_schedule': props.water_schedule})
     .then(response => {
       dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
       dispatch(push('/'));
@@ -139,13 +135,14 @@ const PlantID = localStorage.getItem("plantID");
 
 export const getPlantSchedule = (props) => dispatch => {
   dispatch({ type: FETCH_PLANT_SCHEDULE_REQUEST });
-
-  API().get(`/dashboard/${ID}/my_plant/${PlantID}/schedules`)
-    .then(response =>
-      dispatch({
-        type: FETCH_PLANT_SCHEDULE_SUCCESS,
-        payload: response.data
-      })
+  console.log(props)
+  API().get(`/dashboard/${ID}/my_plant/${props}/schedules`)
+  .then(response =>
+    dispatch({
+      type: FETCH_PLANT_SCHEDULE_SUCCESS,
+      payload: response.data
+    })
+  
     )
     .catch(error => {
       dispatch({
