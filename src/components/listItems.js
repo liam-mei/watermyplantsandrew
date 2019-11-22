@@ -22,9 +22,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from 'react-router-dom'
 import {
   logoutUser,
@@ -63,19 +61,7 @@ function MainListItems(props) {
       <ListItemText primary="Add a plant" />
     </ListItem>
     </Link>
-
-    <ListItem button>
-      <ListItemIcon>
-        <EditIcon />
-      </ListItemIcon>
-      <ListItemText primary="Edit Plant" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DeleteIcon />
-      </ListItemIcon>
-      <ListItemText primary="Delete Plant" />
-    </ListItem>
+    
     <ListItem button onClick = {handleLogout}>
       <ListItemIcon>
         <MeetingRoomIcon />

@@ -22,7 +22,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Dashboard from "./Dashboard";
 import {plants} from '../reducers/plants'
 
-
+import { updatePlantSchedule } from '../actions/'
 
 
 function Copyright() {
@@ -88,7 +88,7 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-const EditPlant = props => {
+const EditWater = props => {
   const classes = useStyles();
 
   const [plant, setPlant] = useState({
@@ -98,14 +98,26 @@ const EditPlant = props => {
     type: "",
   });
 
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const [water, setWater] =useState({
+    plant_id: props.match.params.id,
+    water_schedule:'',
+    user_id: props.match.params.id
+  })
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
+
   const handlerChange = event => {
     event.preventDefault();
-    setPlant({ ...plant, [event.target.name]: event.target.value });
+    setWater({ ...water, [event.target.name]: event.target.value });
   };
   const submitHandler = event => {
     event.preventDefault();
-    props.updatePlant(plant)
-    console.log(plant)
+    props.updatePlantSchedule(water)
+    console.log(water)
   };
 
   return (
@@ -129,47 +141,26 @@ const EditPlant = props => {
 
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Edit-A-Plant
+          Edit-Schedule
         </Typography>
         <form className={classes.form} onSubmit={submitHandler} noValidate>
-          <TextField
-            variant="standard"
-            margin="normal"
-            required="true"
-            fullWidth
-            name="name"
-            value={plant.name}
-            label="Plant Name"
-            type="text"
-            id="plantName"
-            onChange={handlerChange}
-          />
 
-          <TextField
-            variant="standard"
-            margin="normal"
-            required="true"
-            fullWidth
-            name="type"
-            value={plant.type}
-            label="Plant Type"
-            type="text"
-            id="plantName"
-            onChange={handlerChange}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardTimePicker
+              variant="standard"
+              margin="normal"
+              required="true"
+              fullWidth
+              id="h20Frequency"
+              label="h20Frequency"
+              value={selectedDate}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change time',
+              }}
+              />
+          </MuiPickersUtilsProvider>
 
-          <TextField
-            variant="standard"
-            margin="normal"
-            required="true"
-            fullWidth
-            name="location"
-            value={plant.location}
-            label="Plant Location"
-            type="text"
-            id="plantLocation"
-            onChange={handlerChange}
-          />
 
           <Box
             text="Back to Dashboard"
@@ -202,9 +193,9 @@ const EditPlant = props => {
 
 
 const mapDispatchToProps = {
-  updatePlant
+  updatePlantSchedule
 };
 export default connect(
   null,
   mapDispatchToProps
-)(EditPlant);
+)(EditWater);

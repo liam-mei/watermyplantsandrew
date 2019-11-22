@@ -39,8 +39,7 @@ function DeleteMyPlant(id, props) {
           <DialogContentText id="alert-dialog-description">
 
             Are you sure you would like to delete this plant? This action cannot be undone.
-
-          </DialogContentText>
+        </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

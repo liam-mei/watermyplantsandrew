@@ -23,7 +23,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PlantCard from "./PlantCard"
 import { connect } from "react-redux";
 import {getPlants} from "../actions/plants"
-
+import { getPlantSchedule } from "../actions/plants"
 
 function Copyright() {
   return (
@@ -134,12 +134,13 @@ const useStyles = makeStyles(theme => ({
 function Dashboard(props) {
   useEffect(()=>{
     props.getPlants()
+    props.getPlantSchedule()
 },[])
 
 console.log(props)
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -228,7 +229,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getPlants
+  getPlants,
+  getPlantSchedule
 };
 
 export default connect(
