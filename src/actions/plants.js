@@ -62,7 +62,7 @@ export const createPlant = plant => dispatch => {
 
       dispatch({ type: CREATE_PLANT_SUCCESS, payload: response.data });
       updatePlant(response.data)
-      dispatch(push(`/plant/${PlantID}/water`));
+      dispatch(push(`/plant/${ID}/water`));
     })
     .catch(error => {
       dispatch({
@@ -116,12 +116,15 @@ export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
 export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
 export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
 
-export const createPlantSchedule = (water, props) => dispatch => {
-  dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
+const PlantID = localStorage.getItem("plantID");
 
-  API().post(`/dashboard/${ID}/my_plant/${PlantID}/add_schedule`, {'plantID':water.plant_id, 'water':water.water_schedule, 'userID':water.user_id})
+export const createPlantSchedule = (props) => dispatch => {
+  dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
+console.log(props.plant_id);
+  API().post(`/dashboard/${ID}/my_plant/${props.plant_id}/add_schedule`, {"water_schedule":  props.water_schedule })
     .then(response => {
       dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
+      console.log("water time",response.data);
       dispatch(push('/'));
     })
     .catch(error => {
@@ -135,7 +138,7 @@ export const createPlantSchedule = (water, props) => dispatch => {
 export const FETCH_PLANT_SCHEDULE_REQUEST = "FETCH_PLANT_SCHEDULE_REQUEST";
 export const FETCH_PLANT_SCHEDULE_SUCCESS = "FETCH_PLANT_SCHEDULE_SUCCESS";
 export const FETCH_PLANT_SCHEDULE_FAILURE = "FETCH_PLANT_SCHEDULE_FAILURE";
-const PlantID = localStorage.getItem("plantID");
+
 
 export const getPlantSchedule = (props) => dispatch => {
   dispatch({ type: FETCH_PLANT_SCHEDULE_REQUEST });

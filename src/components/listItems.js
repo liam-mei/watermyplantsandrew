@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import clsx from "clsx";
+import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
@@ -48,10 +48,10 @@ function MainListItems(props) {
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary={`Hello, `}/>
-      {/* ${props.user.username} */}
+      <ListItemText primary={`Update Profile`}/>
+
     </ListItem>
-    </Link>
+  </Link>
 
     <Link to='/plant/add'>
     <ListItem button>
@@ -61,7 +61,7 @@ function MainListItems(props) {
       <ListItemText primary="Add a plant" />
     </ListItem>
     </Link>
-    
+
     <ListItem button onClick = {handleLogout}>
       <ListItemIcon>
         <MeetingRoomIcon />
@@ -77,7 +77,7 @@ function MainListItems(props) {
 }
 function mapStateToProps(state) {
   return {
-    user: state.auth.user,
+    user: state.user,
   };
 }
 

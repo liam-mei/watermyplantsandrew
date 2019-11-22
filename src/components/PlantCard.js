@@ -9,19 +9,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-
-
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import DeleteMyPlant from  "./DeletePlant"
-import EditPlant from "./EditPlant"
-import {Route, Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const useStyles = makeStyles({
   card: {
     maxWidth: 345,
   },
 });
+
 export default function PlantCard(props) {
   const classes = useStyles();
   return (
@@ -41,23 +38,21 @@ export default function PlantCard(props) {
             <Typography gutterBottom variant="h5" component="h2">
             {props.plant.name}
             </Typography>
+
+          <Link to={`/plant/${props.id}/edit/water`}>
             <Typography variant="body2" color="textSecondary" component="p">
-         <AccessTimeIcon color="primary" fontSize="small" /> {props.water}  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
+
+              <AccessTimeIcon color="primary" fontSize="small" /> {props.water}  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
             </Typography>
+          </Link>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link to={`/plant/${props.id}/edit/water`}>
-          <Button size="small" color="primary">
-          <EditIcon/>
-            Edit Water
-          </Button>
-          </Link>
 
           <Link to={`/plant/${props.id}/edit`}>
           <Button size="small" color="primary">
           <EditIcon/>
-            Edit
+            Edit Plant
           </Button>
           </Link>
           <Button size="small" color="primary">

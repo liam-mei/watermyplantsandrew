@@ -93,9 +93,9 @@ const Register = props => {
     props.registerUser(user)
     console.log(user)
   };
-  
+
   return (
-    
+
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -143,18 +143,6 @@ const Register = props => {
             autoComplete="current-password"
             onChange={handlerChange}
           />
-          {/* <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="phone"
-            label="Phone Number"
-            name="phone"
-            autoComplete="phone"
-            autoFocus
-            onChange={handlerChange}
-          /> */}
           <StyledButton
             type="submit"
             fullWidth
@@ -163,7 +151,7 @@ const Register = props => {
             className={classes.submit}
           >
             Register
-    
+
           </StyledButton>
           <Grid container>
             <Grid item xs>

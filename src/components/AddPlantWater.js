@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import DateFnsUtils from '@date-io/date-fns';
+import { format, compareAsc } from 'date-fns'
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -93,28 +94,18 @@ const AddPlantWater = props => {
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
-  const [plant, setPlant] = useState({
-    name: "",
-    location: "",
-    type: "",
-    id: props.match.params.id,
-  });
-
   const [water, setWater] = useState({
     plant_id: props.match.params.id,
     water_schedule:'',
-    user_id: props.match.params.id
+    user_id: localStorage.getItem('userID')
   })
 
 
 
   const handleDateChange = date => {
-    setSelectedDate(date);
+    setWater(date);
   };
-  const handlerChange = event => {
-    event.preventDefault();
-    setPlant({ ...water, [event.target.name]: event.target.value });
-  };
+
   const submitHandler = event => {
     event.preventDefault();
     props.createPlantSchedule(water)
@@ -154,6 +145,7 @@ const AddPlantWater = props => {
             fullWidth
             id="h20Frequency"
             label="h20Frequency"
+            fromat={'HH:MM:A'}
             value={water.water_schedule}
             onChange={handleDateChange}
             KeyboardButtonProps={{
