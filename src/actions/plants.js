@@ -55,11 +55,14 @@ export const CREATE_PLANT_FAILURE = "CREATE_PLANT_FAILURE";
 export const createPlant = plant => dispatch => {
   dispatch({ type: CREATE_PLANT_REQUEST });
 
-  API().post(`/dashboard/${ID}/plants/add`, {"name": plant.name, "location": plant.location, "type": plant.type})
+  API().post(`/dashboard/${ID}/plants/add`, {"name": plant.name, "location": plant.location, "type": plant.type, 'id':plant.id})
     .then(response => {
+
+
+
       dispatch({ type: CREATE_PLANT_SUCCESS, payload: response.data });
       updatePlant(response.data)
-      dispatch(push(`/plant/add/${ID}/water`));
+      dispatch(push(`/plant/${PlantID}/water`));
     })
     .catch(error => {
       dispatch({
@@ -113,10 +116,10 @@ export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
 export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
 export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
 
-export const createPlantSchedule = (schedule, props) => dispatch => {
+export const createPlantSchedule = (water, props) => dispatch => {
   dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
 
-  API().post(`/dashboard/${ID}/my_plant/${props.match.params}/add_schedule`, schedule)
+  API().post(`/dashboard/${ID}/my_plant/${PlantID}/add_schedule`, {'plantID':water.plant_id, 'water':water.water_schedule, 'userID':water.user_id})
     .then(response => {
       dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
       dispatch(push('/'));
@@ -132,11 +135,12 @@ export const createPlantSchedule = (schedule, props) => dispatch => {
 export const FETCH_PLANT_SCHEDULE_REQUEST = "FETCH_PLANT_SCHEDULE_REQUEST";
 export const FETCH_PLANT_SCHEDULE_SUCCESS = "FETCH_PLANT_SCHEDULE_SUCCESS";
 export const FETCH_PLANT_SCHEDULE_FAILURE = "FETCH_PLANT_SCHEDULE_FAILURE";
+const PlantID = localStorage.getItem("plantID");
 
 export const getPlantSchedule = (props) => dispatch => {
   dispatch({ type: FETCH_PLANT_SCHEDULE_REQUEST });
 
-  API().get(`/dashboard/${ID}/my_plant/${props.match.params}/schedules`)
+  API().get(`/dashboard/${ID}/my_plant/${PlantID}/schedules`)
     .then(response =>
       dispatch({
         type: FETCH_PLANT_SCHEDULE_SUCCESS,
@@ -158,7 +162,7 @@ export const UPDATE_PLANT_SCHEDULE_FAILURE = "UPDATE_PLANT_SCHEDULE_FAILURE";
 export const updatePlantSchedule = (schedule, props) => dispatch => {
   dispatch({ type: UPDATE_PLANT_SCHEDULE_REQUEST });
 
-  API().put(`/dashboard/${ID}/my_plant/${props.match.params}/update/${props.waterID}`, schedule)
+  API().put(`/dashboard/${ID}/my_plant/${PlantID}/update/${props.waterID}`, schedule)
     .then(response => {
       dispatch({ type: UPDATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
       dispatch(push('/'));

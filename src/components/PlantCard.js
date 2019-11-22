@@ -42,16 +42,19 @@ export default function PlantCard(props) {
             {props.plant.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-         <AccessTimeIcon color="primary" fontSize="small" /> 1:30pm  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
+         <AccessTimeIcon color="primary" fontSize="small" /> {props.water}  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-<<<<<<< HEAD
-          <Link to="/plant/:id/edit">
-=======
-            <Link to={`/plant/${props.id}/edit`}>
->>>>>>> master
+          <Link to={`/plant/${props.id}/edit/water`}>
+          <Button size="small" color="primary">
+          <EditIcon/>
+            Edit Water
+          </Button>
+          </Link>
+
+          <Link to={`/plant/${props.id}/edit`}>
           <Button size="small" color="primary">
           <EditIcon/>
             Edit

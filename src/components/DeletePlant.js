@@ -39,13 +39,7 @@ function DeleteMyPlant(id, props) {
           <DialogContentText id="alert-dialog-description">
 
             Are you sure you would like to delete this plant? This action cannot be undone.
-
-<<<<<<< HEAD
-            Are you sure you would like to delete this plant? This action cannot be undone.
-
-=======
->>>>>>> master
-          </DialogContentText>
+        </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -60,8 +54,6 @@ function DeleteMyPlant(id, props) {
   );
 
 }
-<<<<<<< HEAD
-=======
 
 const mapDispatchToProps = {
     deletePlant
@@ -71,4 +63,3 @@ export default connect(
     null,
     mapDispatchToProps
 )(DeleteMyPlant);
->>>>>>> master

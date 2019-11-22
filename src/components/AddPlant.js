@@ -21,7 +21,7 @@ import { createPlant } from '../actions/plants'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Dashboard from "./Dashboard";
 import {plants} from '../reducers/plants'
-
+import { push } from 'connected-react-router'
 
 
 function Copyright() {
@@ -91,20 +91,15 @@ const AddPlant = props => {
   const classes = useStyles();
   console.log(props)
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
   const [plant, setPlant] = useState({
     name: "",
     location: "",
     type: "",
-    water_schedule: selectedDate
   });
 
 
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
   const handlerChange = event => {
     event.preventDefault();
     setPlant({ ...plant, [event.target.name]: event.target.value });
@@ -178,6 +173,8 @@ const AddPlant = props => {
             onChange={handlerChange}
           />
 
+
+
           <Box
             text="Back to Dashboard"
             color="white"
@@ -187,6 +184,7 @@ const AddPlant = props => {
             left="100%"
             zIndex="tooltip"
           >
+
             <StyledButton
               type="submit"
               variant="contained"

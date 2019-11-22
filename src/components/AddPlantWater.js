@@ -17,7 +17,7 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom'
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { createPlant } from '../actions/plants'
+import { createPlantSchedule } from '../actions/plants'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Dashboard from "./Dashboard";
 import {plants} from '../reducers/plants'
@@ -97,7 +97,14 @@ const AddPlantWater = props => {
     name: "",
     location: "",
     type: "",
+    id: props.match.params.id,
   });
+
+  const [water, setWater] = useState({
+    plant_id: props.match.params.id,
+    water_schedule:'',
+    user_id: props.match.params.id
+  })
 
 
 
@@ -106,12 +113,12 @@ const AddPlantWater = props => {
   };
   const handlerChange = event => {
     event.preventDefault();
-    setPlant({ ...plant, [event.target.name]: event.target.value });
+    setPlant({ ...water, [event.target.name]: event.target.value });
   };
   const submitHandler = event => {
     event.preventDefault();
-    props.createPlant(plant)
-    console.log(plant)
+    props.createPlantSchedule(water)
+    console.log(water)
   };
 
   return (
@@ -147,7 +154,7 @@ const AddPlantWater = props => {
             fullWidth
             id="h20Frequency"
             label="h20Frequency"
-            value={selectedDate}
+            value={water.water_schedule}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               'aria-label': 'change time',
@@ -186,7 +193,7 @@ const AddPlantWater = props => {
 
 
 const mapDispatchToProps = {
-  createPlant
+  createPlantSchedule
 };
 export default connect(
   null,
