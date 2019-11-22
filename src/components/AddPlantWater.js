@@ -89,7 +89,7 @@ const StyledFab = withStyles({
 
 const AddPlantWater = props => {
   const classes = useStyles();
-  console.log(props)
+  console.log(props.match.params.id)
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -102,8 +102,7 @@ const AddPlantWater = props => {
 
   const [water, setWater] = useState({
     plant_id: props.match.params.id,
-    water_schedule:'',
-    user_id: props.match.params.id
+    water_schedule: JSON.stringify(selectedDate)
   })
 
 
@@ -154,7 +153,7 @@ const AddPlantWater = props => {
             fullWidth
             id="h20Frequency"
             label="h20Frequency"
-            value={water.water_schedule}
+            value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               'aria-label': 'change time',
@@ -188,8 +187,6 @@ const AddPlantWater = props => {
     </Container>
   );
 }
-
-
 
 
 const mapDispatchToProps = {

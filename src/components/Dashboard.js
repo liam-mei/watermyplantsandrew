@@ -134,7 +134,6 @@ const useStyles = makeStyles(theme => ({
 function Dashboard(props) {
   useEffect(()=>{
     props.getPlants()
-    props.getPlantSchedule()
 },[])
 
 console.log(props)
@@ -206,6 +205,7 @@ console.log(props)
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Plant 1 */}
+
             {props.plants.map((plant)=>
               <Grid item lg={4} md={7} xs={10}>
                 <PlantCard key={plant.id} id={plant.id} plant={plant} className={fixedHeightPaper}/>
