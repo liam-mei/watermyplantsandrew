@@ -8,37 +8,19 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { authenticateUser } from "../actions/auth";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PhoneIcon from "@material-ui/icons/Phone";
-import EmailIcon from "@material-ui/icons/Email";
-import Fab from "@material-ui/core/Fab";
 import MuiPhoneNumber from 'material-ui-phone-number'
 
 import {updatePhone} from '../actions/index'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Water My Plants
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+//components
+import Copyright from './Copyright'
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -103,28 +85,6 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-const StyledFab2 = withStyles({
-  root: {
-    background: "#078B75",
-    border: 0,
-    color: "white",
-    height: 30,
-    width: 55,
-    padding: "0 30px",
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
-  }
-})(Button);
-const StyledFab3 = withStyles({
-  root: {
-    background: "#078B75",
-    border: 0,
-    color: "white",
-    height: 30,
-    width: 85,
-    padding: "0 30px",
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
-  }
-})(Button);
 
 const StyledButton = withStyles({
   root: {

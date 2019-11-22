@@ -1,41 +1,28 @@
 import React, { useState } from 'react';
+//material-ui/core & icon
+import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+//material-ui/picker
 import Typography from '@material-ui/core/Typography';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker,
 } from '@material-ui/pickers'
-
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+//redux and routing
 import { Link } from 'react-router-dom'
-import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+//actions
 import { createPlant } from '../actions/plants'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Dashboard from "./Dashboard";
-import {plants} from '../reducers/plants'
-import { push } from 'connected-react-router'
+//components
+import Copyright from './Copyright'
 
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Water My Plants
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -91,15 +78,20 @@ const AddPlant = props => {
   const classes = useStyles();
   console.log(props)
 
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
   const [plant, setPlant] = useState({
     name: "",
     location: "",
     type: "",
+    water_schedule: selectedDate
   });
 
 
 
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
   const handlerChange = event => {
     event.preventDefault();
     setPlant({ ...plant, [event.target.name]: event.target.value });
@@ -175,6 +167,22 @@ const AddPlant = props => {
 
 
 
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardTimePicker
+            variant="standard"
+            margin="normal"
+            required="true"
+            fullWidth
+            id="h20Frequency"
+            label="h20Frequency"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change time',
+            }}
+            />
+        </MuiPickersUtilsProvider>
+
           <Box
             text="Back to Dashboard"
             color="white"
@@ -184,14 +192,13 @@ const AddPlant = props => {
             left="100%"
             zIndex="tooltip"
           >
-
             <StyledButton
               type="submit"
               variant="contained"
               color="inherited"
               className={classes.submit}
             >
-              Schedule water time
+              Save
           </StyledButton>
           </Box>
         </form>

@@ -25,18 +25,8 @@ import { connect } from "react-redux";
 import {getPlants} from "../actions/plants"
 import { getPlantSchedule } from "../actions/plants"
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Water Your Plants
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+//components
+import Copyright from './Copyright'
 
 const StyledToolBar = withStyles({
   root: {

@@ -23,20 +23,11 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Dashboard from "./Dashboard";
 import {plants} from '../reducers/plants'
 
+//components
+import Copyright from './Copyright'
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Water My Plants
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles(theme => ({
   "@global": {
