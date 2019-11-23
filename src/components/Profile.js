@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.common.white
     }
   },
+  
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
