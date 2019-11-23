@@ -54,15 +54,11 @@ export const CREATE_PLANT_FAILURE = "CREATE_PLANT_FAILURE";
 
 export const createPlant = plant => dispatch => {
   dispatch({ type: CREATE_PLANT_REQUEST });
-
+  console.log(plant)
   API().post(`/dashboard/${ID}/plants/add`, {"name": plant.name, "location": plant.location, "type": plant.type, 'id':plant.id})
     .then(response => {
-
-
-
       dispatch({ type: CREATE_PLANT_SUCCESS, payload: response.data });
-      updatePlant(response.data)
-      dispatch(push(`/plant/${ID}/water`));
+      dispatch(push(`/plant/${response.data.id}/water`));
     })
     .catch(error => {
       dispatch({
@@ -116,12 +112,12 @@ export const CREATE_PLANT_SCHEDULE_REQUEST = "CREATE_PLANT_SCHEDULE_REQUEST";
 export const CREATE_PLANT_SCHEDULE_SUCCESS = "CREATE_PLANT_SCHEDULE_SUCCESS";
 export const CREATE_PLANT_SCHEDULE_FAILURE = "CREATE_PLANT_SCHEDULE_FAILURE";
 
-const PlantID = localStorage.getItem("plantID");
 
 export const createPlantSchedule = (props) => dispatch => {
   dispatch({ type: CREATE_PLANT_SCHEDULE_REQUEST });
-console.log(props.plant_id);
-  API().post(`/dashboard/${ID}/my_plant/${props.plant_id}/add_schedule`, {"water_schedule":  props.water_schedule })
+  console.log(props)
+  API().post(`/dashboard/${ID}/my_plant/${props.plant_id}/add_schedule`, {'water_schedule': props.water_schedule})
+
     .then(response => {
       dispatch({ type: CREATE_PLANT_SCHEDULE_SUCCESS, payload: response.data });
       console.log("water time",response.data);
@@ -142,13 +138,14 @@ export const FETCH_PLANT_SCHEDULE_FAILURE = "FETCH_PLANT_SCHEDULE_FAILURE";
 
 export const getPlantSchedule = (props) => dispatch => {
   dispatch({ type: FETCH_PLANT_SCHEDULE_REQUEST });
-
-  API().get(`/dashboard/${ID}/my_plant/${PlantID}/schedules`)
-    .then(response =>
-      dispatch({
-        type: FETCH_PLANT_SCHEDULE_SUCCESS,
-        payload: response.data
-      })
+  console.log(props)
+  API().get(`/dashboard/${ID}/my_plant/${props}/schedules`)
+  .then(response =>
+    dispatch({
+      type: FETCH_PLANT_SCHEDULE_SUCCESS,
+      payload: response.data
+    })
+  
     )
     .catch(error => {
       dispatch({
